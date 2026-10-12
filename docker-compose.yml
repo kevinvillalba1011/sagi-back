@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: sagi-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-sagi}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-sagi_dev_password}
+      POSTGRES_DB: ${DB_NAME:-sagi}
+    ports:
+      - '127.0.0.1:${DB_PORT:-5432}:5432' # solo accesible desde tu equipo
+    volumes:
+      - sagi_pgdata:/var/lib/postgresql/data
+      - ./docker/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER:-sagi} -d ${DB_NAME:-sagi}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  sagi_pgdata:

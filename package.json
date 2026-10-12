@@ -1,0 +1,77 @@
+{
+  "name": "back-sagi",
+  "version": "0.1.0",
+  "description": "SAGI - Sistema Automatizado de Gestión de Inventario (API)",
+  "private": true,
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "nest build",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:prod": "node dist/main",
+    "lint": "oxlint src test",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "test": "vitest run",
+    "test:e2e": "vitest run --config ./vitest.config.e2e.ts",
+    "typeorm": "typeorm -d dist/database/data-source.js",
+    "migration:generate": "pnpm run build && typeorm -d dist/database/data-source.js migration:generate",
+    "migration:run": "pnpm run build && typeorm -d dist/database/data-source.js migration:run",
+    "migration:revert": "pnpm run build && typeorm -d dist/database/data-source.js migration:revert",
+    "seed": "pnpm run build && node dist/database/seed.js",
+    "migration:show": "pnpm run build && typeorm -d dist/database/data-source.js migration:show"
+  },
+  "dependencies": {
+    "@nestjs/common": "^12.0.1",
+    "@nestjs/config": "^12.0.1",
+    "@nestjs/core": "^12.0.1",
+    "@nestjs/jwt": "^12.0.2",
+    "@nestjs/passport": "^12.0.0",
+    "@nestjs/platform-express": "^12.0.1",
+    "@nestjs/swagger": "^12.0.2",
+    "@nestjs/throttler": "^6.7.1",
+    "@nestjs/typeorm": "^12.0.2",
+    "argon2": "^0.44.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.0",
+    "helmet": "^8.1.0",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "pg": "^8.16.3",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1",
+    "typeorm": "^0.3.27",
+    "typeorm-naming-strategies": "^4.1.0"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^12.0.0",
+    "@nestjs/schematics": "^12.0.0",
+    "@nestjs/testing": "^12.0.1",
+    "@swc/core": "^1.13.0",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "@types/passport-jwt": "^4.0.1",
+    "@types/supertest": "^6.0.3",
+    "oxlint": "^1.58.0",
+    "prettier": "^3.4.2",
+    "supertest": "^7.0.0",
+    "typescript": "^6.0.2",
+    "unplugin-swc": "^1.5.7",
+    "vitest": "^4.1.2"
+  },
+  "type": "module",
+  "packageManager": "pnpm@10.28.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "argon2",
+      "@swc/core",
+      "@nestjs/core",
+      "esbuild"
+    ]
+  }
+}
